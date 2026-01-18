@@ -199,7 +199,7 @@ document.querySelector("#submitBtn").addEventListener("click", async () => {
       const res = await fetch("/api/submit-assessment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(e),
       });
 
       if (!res.ok) {
