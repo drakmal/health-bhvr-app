@@ -20,5 +20,5 @@ app.post("/api/telegram/webhook", telegramWebhookHandler);
 app.post("/api/reminders/send-due", sendDueRemindersHandler);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`✅ Server running at http://localhost:${process.env.PORT || 3000}`);
+  console.log(`✅ Server running at https://pwvdoqxmpdcncegneakq.supabase.co`);
 });
