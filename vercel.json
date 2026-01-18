@@ -7,11 +7,14 @@
     },
     {
       "src": "health-bhvr-frontend/package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "src/index.js" },
-    { "src": "/(.*)", "dest": "health-bhvr-frontend/dist/index.html" }
+    { "src": "/(.*)", "dest": "index.html" }
   ]
 }
