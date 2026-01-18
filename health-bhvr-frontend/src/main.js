@@ -1,4 +1,4 @@
-const API_BASE = "https://pwvdoqxmpdcncegneakq.supabase.co";
+const API_BASE = "";
 
 document.querySelector("#app").innerHTML = `
   <div style="max-width:520px;margin:24px auto;font-family:system-ui;padding:16px;">
