@@ -174,9 +174,9 @@ function renderOutput(tailored) {
 
 document.querySelector("#submitBtn").addEventListener("click", async () => {
   try {
-    showStatus("Submitting...");
+    a("Submitting...");
 
-    const body = {
+    const payload = {
       age_group: document.querySelector("#age_group").value,
       sex: document.querySelector("#sex").value,
       district: document.querySelector("#district").value,
@@ -192,29 +192,27 @@ document.querySelector("#submitBtn").addEventListener("click", async () => {
       auditc_q1: Number(document.querySelector("#auditc_q1").value || 0),
       auditc_q2: Number(document.querySelector("#auditc_q2").value || 0),
       auditc_q3: Number(document.querySelector("#auditc_q3").value || 0),
+
       alcohol_intention: document.querySelector("#alcohol_intention").value,
-      alcohol_cutdown_3m: document.querySelector("#alcohol_cutdown_3m").value
+      alcohol_cutdown_3m: document.querySelector("#alcohol_cutdown_3m").value,
     };
 
-      const res = await fetch("/api/submit-assessment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(e),
-      });
+    const res = await fetch("/api/submit-assessment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload), // ✅ always payload
+    });
 
-      if (!res.ok) {
-        const text = await res.text(); // read HTML or error text
-        throw new Error(`API error ${res.status}: ${text.slice(0, 120)}`);
-      }
+    const json = await res.json();
 
-    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(json?.error || `API error ${res.status}`);
+    }
 
-    if (!res.ok) throw new Error(json?.error || "Submission failed");
-
-    showStatus("✅ Submitted. Advice generated.");
-    renderOutput(json.tailored_output);
+    a("✅ Submitted. Advice generated.");
+    p(json.tailored_output);
   } catch (err) {
     console.error(err);
-    showError(`❌ ${err.message || err}`);
+    s(`❌ ${err.message || err}`);
   }
 });
