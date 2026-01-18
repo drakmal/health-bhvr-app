@@ -9,12 +9,13 @@
       "src": "health-bhvr-frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "buildCommand": "cd health-bhvr-frontend && npm run build",
+        "distDir": "health-bhvr-frontend/dist"
       }
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "src/index.js" },
-    { "src": "/(.*)", "dest": "index.html" }
+    { "src": "/(.*)", "dest": "health-bhvr-frontend/dist/index.html" }
   ]
 }
