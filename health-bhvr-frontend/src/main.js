@@ -196,13 +196,18 @@ document.querySelector("#submitBtn").addEventListener("click", async () => {
       alcohol_cutdown_3m: document.querySelector("#alcohol_cutdown_3m").value
     };
 
-    const res = await fetch(`${API_BASE}/api/submit-assessment`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
+      const res = await fetch("/api/submit-assessment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const json = await res.json();
+      if (!res.ok) {
+        const text = await res.text(); // read HTML or error text
+        throw new Error(`API error ${res.status}: ${text.slice(0, 120)}`);
+      }
+
+    const data = await res.json();
 
     if (!res.ok) throw new Error(json?.error || "Submission failed");
 
