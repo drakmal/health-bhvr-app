@@ -9,7 +9,6 @@
       "src": "health-bhvr-frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run build --prefix health-bhvr-frontend",
         "distDir": "health-bhvr-frontend/dist"
       }
     }
